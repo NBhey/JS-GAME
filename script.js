@@ -1,6 +1,20 @@
 // ПЕРЕМЕННЫЕ
 let heroImg = document.getElementById("hero-img");
+heroImg.onclick = (event) =>{
+  event.preventDeafult()
+}
 let imgBlock = document.getElementById("img-block");
+let canvas = document.getElementById("canvas");
+let fsButton = document.getElementById("fsButton");
+fsButton.onclick = () => {
+  if (window.document.fullscreen) {
+    fsButton.src = './img/fullscreen.png'
+    window.document.exitFullscreen();
+  } else {
+    fsButton.src = './img/cancel.png'
+    canvas.requestFullscreen();
+  }
+};
 let imgBlockPosition = 0;
 let rightPosition = 0;
 //   ФУНКЦИИ
@@ -30,15 +44,14 @@ let timer = null;
 let x = 0;
 let halfWidth = window.screen.width / 2;
 let onTouchStart = (event) => {
-  event.preventDefault();
-  x = (event.type === "mousedown")? event.screenX : event.touches[0].screenX;
+  clearInterval(timer);
+  x = event.type === "mousedown" ? event.screenX : event.touches[0].screenX;
   timer = setInterval(() => {
-    x > halfWidth ? rightHandler() : leftHandler()
+    x > halfWidth ? rightHandler() : leftHandler();
   }, 130);
 };
 
 let onTouchEnd = (event) => {
-  event.preventDefault();
   clearInterval(timer);
 };
 

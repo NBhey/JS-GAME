@@ -6,16 +6,44 @@
     <title>Document</title>
   </head>
   <body>
-    <div id="img-block" style="width: 288px; height: 288px; overflow: hidden;position: relative;left: 0px;">
+    <div id="canvas" style="background-color: white;">
       <img
-        id="hero-img"
-        style="width: 1728px; height: 1152px; position: relative; top: -576px; left: 0px; transform: scale(-1,1);"
-        src="./img/hero-sprite.png"
-        alt="hero"
+        src="./img/fullscreen.png"
+        id="fsButton"
+        style="
+          width: 40px;
+          height: 40px;
+          position: absolute;
+          top: 20px;
+          right: 20px;
+        "
       />
+      <div
+        id="img-block"
+        style="
+          width: 288px;
+          height: 288px;
+          overflow: hidden;
+          position: relative;
+          left: 0px;
+        "
+      >
+        <img
+          id="hero-img"
+          style="
+            width: 1728px;
+            height: 1152px;
+            position: relative;
+            top: -576px;
+            left: 0px;
+            transform: scale(-1, 1);
+          "
+          src="./img/hero-sprite.png"
+          alt="hero"
+        />
+      </div>
     </div>
 
-    <script src="script.js" type="module">
-    </script>
+    <script src="script.js" type="module"></script>
   </body>
 </html>
