@@ -1,17 +1,23 @@
 // ПЕРЕМЕННЫЕ
+let imgBlockPosition = 0;
+let rightPosition = 0;
+let direction = "right";
+let hit = false;
+let jump = false;
+let timer = null;
+let x = 0;
+let halfWidth = window.screen.width / 2;
 let jumpBlock = document.getElementById("jump-block");
-jumpBlock.style.top = `${window.screen.height / 2 - 144 / 2}`;
-
 let hitBlock = document.getElementById("hit-block");
-hitBlock.style.top = `${window.screen.height / 2 - 144 / 2}`;
-
 let heroImg = document.getElementById("hero-img");
-heroImg.onclick = (event) => {
-  event.preventDeafult();
-};
 let imgBlock = document.getElementById("img-block");
 let canvas = document.getElementById("canvas");
 let fsButton = document.getElementById("fsButton");
+jumpBlock.style.top = `${window.screen.height / 2 - 144 / 2}px`;
+hitBlock.style.top = `${window.screen.height / 2 - 144 / 2}px`;
+heroImg.onclick = (event) => {
+  event.preventDeafult();
+};
 fsButton.onclick = () => {
   if (window.document.fullscreen) {
     fsButton.src = "./img/fullscreen.png";
@@ -28,11 +34,7 @@ jumpBlock.onclick = () => {
 hitBlock.onclick = () => {
   hit = true;
 };
-let imgBlockPosition = 0;
-let rightPosition = 0;
-let direction = "right";
-let hit = false;
-let jump = false;
+
 //   ФУНКЦИИ
 const rightHandler = () => {
   heroImg.style.transform = "scale(-1,1)";
@@ -86,18 +88,18 @@ const standHandler = () => {
   heroImg.style.left = `-${rightPosition * 96}px`;
   heroImg.style.top = "0px";
 };
-const hitHandler = ()=>{
-  heroImg.style.transform = "scale(-1,1)";
-  if (rightPosition > 4) {
-    rightPosition = 1;
-  }
+const hitHandler = () => {
+  // heroImg.style.transform = "scale(-1,1)";
+  // if (rightPosition > 4) {
+  //   rightPosition = 1;
+  // }
 
   switch (direction) {
     case "right": {
       heroImg.style.transform = "scale(-1,1)";
       if (rightPosition > 4) {
         rightPosition = 1;
-        jump = false;
+        hit = false;
       }
       break;
     }
@@ -105,7 +107,7 @@ const hitHandler = ()=>{
       heroImg.style.transform = "scale(1,1)";
       if (rightPosition > 3) {
         rightPosition = 0;
-        jump = false;
+        hit = false;
       }
       break;
     }
@@ -113,21 +115,21 @@ const hitHandler = ()=>{
       break;
   }
   rightPosition = rightPosition + 1;
-  heroImg.style.left = `-${rightPosition * 288}px`;
+  heroImg.style.left = `-${rightPosition * 96}px`;
   heroImg.style.top = "-288px";
-}
-const jumpHandler = ()=>{
-  heroImg.style.transform = "scale(-1,1)";
-  if (rightPosition > 4) {
-    rightPosition = 1;
-  }
+};
+const jumpHandler = () => {
+  // heroImg.style.transform = "scale(-1,1)";
+  // if (rightPosition > 4) {
+  //   rightPosition = 1;
+  // }
 
   switch (direction) {
     case "right": {
       heroImg.style.transform = "scale(-1,1)";
       if (rightPosition > 4) {
         rightPosition = 1;
-        hit = false;
+        jump = false;
       }
       break;
     }
@@ -135,7 +137,7 @@ const jumpHandler = ()=>{
       heroImg.style.transform = "scale(1,1)";
       if (rightPosition > 3) {
         rightPosition = 0;
-        hit = false;
+        jump = false;
       }
       break;
     }
@@ -143,15 +145,10 @@ const jumpHandler = ()=>{
       break;
   }
   rightPosition = rightPosition + 1;
-  heroImg.style.left = `-${rightPosition * 288}px`;
-  heroImg.style.top = "-864px";
-}
+  heroImg.style.left = `-${rightPosition * 96}px`;
+  heroImg.style.top = "-96px";
+};
 //   ОБРАБОТЧИКИ СОБЫТИЙ
-let timer = null;
-
-let x = 0;
-let halfWidth = window.screen.width / 2;
-
 let onTouchStart = (event) => {
   clearInterval(timer);
   x = event.type === "mousedown" ? event.screenX : event.touches[0].screenX;
@@ -193,19 +190,18 @@ const addTiles = (i) => {
 };
 const lifeCycle = () => {
   timer = setInterval(() => {
-    if (hit){
-      hitHandler()
-    } else if(jump){
-      jumpHandler()
+    if (hit) {
+      hitHandler();
+    } else if (jump) {
+      jumpHandler();
     } else {
       standHandler();
     }
-    
   }, 150);
 };
 const start = () => {
   lifeCycle();
-  for (let i = 0; i < 58; i += 1) {
+  for (let i = 0; i < 59; i += 1) {
     addTiles(i);
   }
 };
