@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './index.js', // точка входа сборщика webpack
+  entry: './script.js', // точка входа сборщика webpack
   output: {
     clean: true,
     path: path.resolve(__dirname, 'prod'),
